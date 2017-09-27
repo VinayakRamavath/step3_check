@@ -13,14 +13,15 @@ public class DataMunger {
 	public static void main(String[] args) {
 
 		// read the file name from the user
-
+Scanner sc=new Scanner(System.in);
+String ag=sc.next();
 		/*
 		 * create object of CsvQueryProcessor. We are trying to read from a file inside
 		 * the constructor of this class. Hence, we will have to handle exceptions.
 		 */
 		try {
 			System.out.println("tata");
-		CsvQueryProcessor csv=new CsvQueryProcessor("data/ipl.csv");
+		CsvQueryProcessor csv=new CsvQueryProcessor(ag);
 		System.out.println("tata");
 		/*
 		 * call getHeader() method of CsvQueryProcessor class to retrieve the array of

@@ -61,94 +61,53 @@ public class CsvQueryProcessor extends QueryProcessingEngine {
 	 */
 	@Override
 	public DataTypeDefinitions getColumnType() throws IOException {
-		try {
+		try {// String[] columns = header2.split(",");
+			//
+			// for (int i = 0; i < columns.length; i++) {
+			// try {
+			// Integer.parseInt(columns[i]);
+			// System.out.print(headerss[i]);
+			// System.out.println(((Object) columns[i]).getClass().getName());
+			// } catch (Exception e) {
+			// System.out.print(headerss[i]);
+			// System.out.println(((Object) columns[i]).getClass().getName());
+			// }
+			// }
 			BufferedReader br = new BufferedReader(new FileReader("data/ipl.csv"));
 			String header = br.readLine();
 			String header2 = br.readLine();
 			
 				String[] headerss = header.split(",");
 				System.out.println(headerss.length);
-				// String[] columns = header2.split(",");
-				//
-				// for (int i = 0; i < columns.length; i++) {
-				// try {
-				// Integer.parseInt(columns[i]);
-				// System.out.print(headerss[i]);
-				// System.out.println(((Object) columns[i]).getClass().getName());
-				// } catch (Exception e) {
-				// System.out.print(headerss[i]);
-				// System.out.println(((Object) columns[i]).getClass().getName());
-				// }
-				// }
 				if (header2 != null) {
-					String[] col=new String[18];
-				String[] columns = header2.split(",");
-				int int1,int2,int3,int4,int5;
-				try {
-				int1 = Integer.parseInt(columns[0]);
-				int2 = Integer.parseInt(columns[1]);
-				int3 = Integer.parseInt(columns[9]);
-				int4 = Integer.parseInt(columns[11]);
-				int5 = Integer.parseInt(columns[12]);
-				}
-				catch(NumberFormatException e) {
-					int1 = Integer.parseInt(columns[0]);
-					int2 = Integer.parseInt(columns[1]);
-					int3 = Integer.parseInt(columns[9]);
-					int4 = Integer.parseInt(columns[11]);
-					int5 = Integer.parseInt(columns[12]);
-				}
-				System.out.print(headerss[0]);
-				System.out.println(":" +((Object) int1).getClass().getName());
-				col[0]=((Object) int1).getClass().getName();
-				System.out.print(headerss[1]);
-				System.out.println(":" +((Object) int2).getClass().getName());
-				col[1]=((Object) int2).getClass().getName();
-				for (int i = 2; i < 9; i++) {
-					if(columns[i]!=null) {
-					System.out.print(headerss[i]);
-					col[i]=columns[i].getClass().getName();
-					System.out.println(":" + col[i]);
-					}
-				}
-				System.out.print(headerss[9]);
-				col[9]=((Object) int3).getClass().getName();
-				System.out.println(col[9]);
-				for (int i = 10; i < 11; i++) {
-					if(columns[i]!=null) {
-					System.out.print(headerss[i]);
-					col[i]=columns[i].getClass().getName();
-					System.out.println(":" + col[i]);
-					}
-				}
-				System.out.print(headerss[11]);
-				System.out.println(":" +((Object) int3).getClass().getName());
-				col[11]=((Object) int4).getClass().getName();
-				System.out.print(headerss[12]);
-				System.out.println(":" +((Object) int4).getClass().getName());
-				col[12]=((Object) int5).getClass().getName();
-				for (int i = 13; i < 17; i++) {
-					if(columns[i]!=null) {
-					System.out.print(headerss[i]);
-					
-					col[i]=columns[i].getClass().getName();
-					System.out.println(":" + col[i]);
-					}
-				}
-				col[17]=columns[17].getClass().getName();
-				for(int i=0;i<col.length;i++)
-					System.out.println(col[i]);
-				System.out.print(headerss[17]);
-				System.out.print(headerss[17]);
+					String[] col=new String[headerss.length];
+				String[] columns = header2.split(",",-1);
+				System.out.println(columns.length);
+				 for (int i = 0; i < columns.length; i++) {
+					 if(!columns[i].isEmpty()) {
+					 try {
+						 int num=Integer.parseInt(columns[i]);
+						 System.out.print(headerss[i]);
+						 col[i]=((Object) num).getClass().getName();
+						 System.out.println(col[i]);
+						 } catch (Exception e) {
+						System.out.print(headerss[i]);
+						col[i]=((Object) columns[i]).getClass().getName();
+						System.out.println(col[i]);
+						 }
+					 }
+					 else {
+						 String ag="";
+						 col[i]=ag.getClass().getName();
+							System.out.println(col[i]);
+					 }
+				 }
 				DataTypeDefinitions a = new DataTypeDefinitions(col);
 				return a;
 			} else
 				return null;
 			// return null;
-		} catch (FileNotFoundException e) {
-			System.out.println("file not found");
-			return null;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("file not found");
 			return null;
 		}
