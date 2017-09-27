@@ -83,12 +83,21 @@ public class CsvQueryProcessor extends QueryProcessingEngine {
 				if (header2 != null) {
 					String[] col=new String[18];
 				String[] columns = header2.split(",");
-				int int1 = Integer.parseInt(columns[0]);
-				int int2 = Integer.parseInt(columns[1]);
-				int int3 = Integer.parseInt(columns[9]);
-				int int4 = Integer.parseInt(columns[11]);
-				int int5 = Integer.parseInt(columns[12]);
-				
+				int int1,int2,int3,int4,int5;
+				try {
+				int1 = Integer.parseInt(columns[0]);
+				int2 = Integer.parseInt(columns[1]);
+				int3 = Integer.parseInt(columns[9]);
+				int4 = Integer.parseInt(columns[11]);
+				int5 = Integer.parseInt(columns[12]);
+				}
+				catch(NumberFormatException e) {
+					int1 = Integer.parseInt(columns[0]);
+					int2 = Integer.parseInt(columns[1]);
+					int3 = Integer.parseInt(columns[9]);
+					int4 = Integer.parseInt(columns[11]);
+					int5 = Integer.parseInt(columns[12]);
+				}
 				System.out.print(headerss[0]);
 				System.out.println(":" +((Object) int1).getClass().getName());
 				col[0]=((Object) int1).getClass().getName();
